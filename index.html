@@ -1,36 +1,63 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cosmos 3D | Yogesh Cosmos Space Explorer</title>
-    <meta name="description" content="Cosmos 3D by Yogesh: explore the universe with interactive 3D planets, NASA and ISRO missions, ISS tracking, and live space data.">
-    <meta name="keywords" content="cosmos, Yogesh, cosmos-3d, Yogesh Cosmos, space explorer, 3D space, NASA, ISRO, planets, ISS tracking, astronomy">
-    <meta name="author" content="Yogesh">
-    <meta name="application-name" content="Cosmos 3D">
-    <meta name="theme-color" content="#0a0e27">
-    <meta name="robots" content="index, follow, max-image-preview:large">
-    <link rel="canonical" href="https://sathishyogesh20-del.github.io/cosmos-3d/">
-
-    <!-- Open Graph -->
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="Cosmos 3D">
-    <meta property="og:title" content="Cosmos 3D | Yogesh Cosmos Space Explorer">
-    <meta property="og:description" content="Explore the universe through interactive 3D visualizations, NASA and ISRO missions, and live space data.">
-    <meta property="og:url" content="https://sathishyogesh20-del.github.io/cosmos-3d/">
-    <meta property="og:image" content="https://sathishyogesh20-del.github.io/cosmos-3d/og-image.png">
-    <meta property="og:image:alt" content="Cosmos 3D space explorer">
-
-    <!-- Twitter/X -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Cosmos 3D | Yogesh Cosmos Space Explorer">
-    <meta name="twitter:description" content="Interactive 3D planets, NASA and ISRO missions, ISS tracking, and live space data.">
-    <meta name="twitter:image" content="https://sathishyogesh20-del.github.io/cosmos-3d/og-image.png">
-
-    <link rel="sitemap" type="application/xml" href="https://sathishyogesh20-del.github.io/cosmos-3d/sitemap.xml">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=Rajdhani:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cosmos 3D | Space Explorer</title>
+  <meta name="description" content="Explore planets, missions and live space data with Cosmos 3D.">
+  <meta name="theme-color" content="#0a0e27">
+  <link rel="canonical" href="https://sathishyogesh20-del.github.io/cosmos-3d/">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
+  <canvas id="starfield" aria-hidden="true"></canvas>
+  <div id="space-particles" class="space-particles" aria-hidden="true"></div>
+
+  <div id="loading-screen" class="loading-screen" role="status" aria-live="polite">
+    <div class="loading-container">
+      <div class="rocket-loader" aria-hidden="true"><div class="rocket"><div class="rocket-body"><div class="rocket-window"></div><div class="rocket-fin fin-left"></div><div class="rocket-fin fin-right"></div><div class="rocket-flame"></div></div></div></div>
+      <h1 class="loading-title">COSMOS 3D</h1>
+      <div class="loading-bar-container"><div id="loading-bar" class="loading-bar"></div></div>
+      <p id="loading-text" class="loading-text">Initializing space systems...</p>
+      <div id="loading-percent" class="loading-stats">0%</div>
+    </div>
+  </div>
+
+  <header id="navbar" class="navbar">
+    <div class="nav-container">
+      <a class="nav-logo" href="#home" aria-label="Cosmos 3D home"><span class="logo-text">COSMOS <span class="logo-3d">3D</span></span></a>
+      <button id="nav-toggle" class="nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button>
+      <nav class="nav-menu" aria-label="Main navigation">
+        <a class="nav-item active" href="#home">Home</a><a class="nav-item" href="#missions">Missions</a><a class="nav-item" href="#planets">Planets</a><a class="nav-item" href="#live">Live Data</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section id="home" class="hero-section">
+      <div id="hero-3d" class="hero-3d-scene" aria-hidden="true"></div>
+      <div class="hero-content">
+        <div class="hero-badge"><span class="badge-pulse"></span> HUMANITY'S WINDOW TO THE COSMOS</div>
+        <h1 class="hero-title"><span class="title-line">EXPLORE</span><span class="title-line title-gradient">THE UNIVERSE</span><span class="title-line">IN 3D</span></h1>
+        <p class="hero-subtitle">Discover worlds beyond our own, follow historic missions and connect to live space data.</p>
+        <div class="hero-actions"><a class="btn-primary btn-glow" href="#planets"><span class="btn-icon">🌌</span> Explore planets</a><a class="btn-secondary btn-glass" href="#missions"><span class="btn-icon">🚀</span> View missions</a></div>
+        <div class="hero-stats"><div class="stat-card"><span class="stat-icon">🪐</span><span class="stat-value" data-target="8">0</span><span class="stat-label">Planets</span></div><div class="stat-card"><span class="stat-icon">🚀</span><span class="stat-value" data-target="6">0</span><span class="stat-label">Featured missions</span></div><div class="stat-card"><span class="stat-icon">🌍</span><span id="people-in-space" class="stat-value" data-target="0">0</span><span class="stat-label">People in space</span></div></div>
+      </div>
+      <div class="scroll-indicator" aria-hidden="true"><div class="scroll-mouse"><div class="scroll-wheel"></div></div><span>Scroll to explore</span></div>
+    </section>
+
+    <section id="missions" class="missions-section"><div class="section-header"><span class="section-badge">NASA • ISRO • WORLDWIDE</span><h2 class="section-title">Mission Control</h2><p class="section-subtitle">Milestones that expand our understanding of space.</p></div><div id="missions-grid" class="missions-container"></div></section>
+
+    <section id="planets" class="planets-section"><div class="section-header"><span class="section-badge">SOLAR SYSTEM</span><h2 class="section-title">Meet the Planets</h2><p class="section-subtitle">Select a world and inspect its vital statistics.</p></div><div class="planets-viewer"><canvas id="planets-canvas" class="planets-canvas" aria-label="Interactive 3D planet viewer"></canvas><div class="planets-controls" role="group" aria-label="Choose a planet"><button class="planet-btn active" data-planet="earth">Earth</button><button class="planet-btn" data-planet="mercury">Mercury</button><button class="planet-btn" data-planet="venus">Venus</button><button class="planet-btn" data-planet="mars">Mars</button><button class="planet-btn" data-planet="jupiter">Jupiter</button><button class="planet-btn" data-planet="saturn">Saturn</button><button class="planet-btn" data-planet="uranus">Uranus</button><button class="planet-btn" data-planet="neptune">Neptune</button></div><div id="planet-info" class="planet-info"><h3 class="planet-name">Earth</h3><p class="detail"><span>Type:</span> Terrestrial</p><p class="detail"><span>Distance:</span> 149.6M km</p><p class="detail"><span>Diameter:</span> 12,742 km</p><p class="detail"><span>Moons:</span> 1</p></div></div></section>
+
+    <section id="live" class="live-section"><div class="section-header"><span class="section-badge">LIVE TELEMETRY</span><h2 class="section-title">Space Right Now</h2><p id="live-status" class="section-subtitle">Connecting to live data...</p></div><div class="agencies-grid"><article class="agency-card"><div class="agency-bg"></div><div class="agency-logo"><div class="logo-ring"></div><span class="logo-text">ISS</span></div><h3 class="agency-name">International Space Station</h3><p class="agency-description">Current approximate position of humanity's orbital laboratory.</p><div class="agency-stats"><div class="agency-stat"><span id="iss-lat" class="stat-num">--°</span><span class="stat-txt">Latitude</span></div><div class="agency-stat"><span id="iss-lon" class="stat-num">--°</span><span class="stat-txt">Longitude</span></div><div class="agency-stat"><span id="iss-altitude" class="stat-num">408 km</span><span class="stat-txt">Altitude</span></div><div class="agency-stat"><span id="iss-speed" class="stat-num">27,600</span><span class="stat-txt">km/h</span></div></div><div id="astronaut-list" class="agency-highlights"><div class="highlight-item">Loading crew manifest...</div></div></article><article class="agency-card nasa-card"><div class="agency-bg"></div><div class="agency-logo"><div class="logo-ring"></div><span class="logo-text">NASA</span></div><h3 id="apod-title" class="agency-name">Astronomy Picture of the Day</h3><div id="apod-loader" class="agency-highlights"><div class="highlight-item">Loading NASA image...</div></div><img id="apod-image" alt="NASA Astronomy Picture of the Day" style="width:100%;border-radius:12px;display:none"><p id="apod-explanation" class="agency-description"></p><small id="apod-date" class="section-subtitle"></small></article></div></section>
+  </main>
+  <footer style="text-align:center;padding:3rem 1rem;color:var(--text-gray)">Cosmos 3D • Built for curious minds • Last update: <span id="last-update">--</span></footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+  <script src="cosmos-3d.js"></script>
+</body>
+</html>
